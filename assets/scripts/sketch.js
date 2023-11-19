@@ -6,6 +6,7 @@ var h = 2000;
 var flying = 0;
 
 var terrain;
+var is_motion_started = false;
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
@@ -18,23 +19,24 @@ function setup() {
 }
 
 function draw() {
-    flying -= 0.20;
+    if (is_motion_started) {
+        flying -= 0.20;
+    }
 
-    var yoff = flying;
+    var y_offset = flying;
     for (var y = 0; y < rows; y++) {
-        var xoff = 0;
+        var x_offset = 0;
         for (var x = 0; x < cols; x++) {
-            terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
-            xoff += 0.15;
+            terrain[x][y] = map(noise(x_offset, y_offset), 0, 1, -100, 100);
+            x_offset += 0.15;
         }
-        yoff += 0.1;
+        y_offset += 0.1;
     }
 
     background(0);
     stroke(255);
     fill(51);
 
-    // translate(width / 2, height / 2);
     rotateX(PI / 2.3);
     translate(-w / 2, -h / 2);
     for (var y = 0; y < rows - 1; y++) {
@@ -42,7 +44,6 @@ function draw() {
         for (var x = 0; x < cols; x++) {
             vertex(x * scl, y * scl, terrain[x][y]);
             vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
-            // rect(x * scl, y * scl, scl, scl);
         }
         endShape();
     }

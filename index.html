@@ -8,13 +8,25 @@
     <meta name="keywords" content="Thomas Conort, website, terrain, 3D, Perlin Noise">
     <meta name="author" content="Thomas Conort">
     <title>Terrain</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="assets/styles/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="assets/scripts/sketch.js"></script>
 </head>
 
 <body>
+    <script>
+        document.addEventListener('click', function () { play(); });
+        document.addEventListener('keydown', function () { play(); });
+
+        function play() {
+            var audio = document.getElementById("audio");
+            audio.play();
+            is_motion_started = true;
+        }
+    </script>
+
+    <audio id="audio" src="assets/audio/Mach_One-Chillwave-Synthwave_Mix.mp3"></audio>
+
 </body>
 
 </html>
